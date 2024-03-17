@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "../Modal";
-import Heading from "../Heading";
 import { api } from "../../../api";
 import { toast } from "sonner";
 import useEditCategoryModal from "../../../hooks/useEditCategoryModal";
@@ -45,23 +44,25 @@ const EditCategoryModal = () => {
   };
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      setIsLoading(true);
-      try {
-        const response = await api.get(`/category/${categoryId}`);
-        if (response.status === 200) {
-          const category = response.data.category;
-          const fetchedName = category.name;
-          setCategory(category);
-          setName(fetchedName);
+    if (editCategoryModal.isOpen) {
+      const fetchCategory = async () => {
+        setIsLoading(true);
+        try {
+          const response = await api.get(`/category/${categoryId}`);
+          if (response.status === 200) {
+            const category = response.data.category;
+            const fetchedName = category.name;
+            setCategory(category);
+            setName(fetchedName);
+          }
+        } catch (error) {
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCategory();
-  }, [categoryId]);
+      };
+      fetchCategory();
+    }
+  }, [categoryId, editCategoryModal.isOpen]);
 
   const modalContent = (
     <div className="flex flex-col justify-evenly gap-y-5">

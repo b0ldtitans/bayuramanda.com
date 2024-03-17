@@ -1,6 +1,6 @@
 import React, { useEffect, useState, lazy, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { Sidebar, LoadingDots } from "../../components";
+import { Sidebar, LoadingDots, PhotoContextMenu } from "../../components";
 import { api, imgBaseURL } from "../../api";
 import { Pagination } from "@mantine/core";
 const ImageViewer = lazy(() => import("react-simple-image-viewer"));
@@ -61,6 +61,7 @@ export default function AlbumPage() {
     return <LoadingDots />;
   }
 
+  document.title = `${categoryData.name} - Album`;
   return (
     <div className="flex h-full w-full">
       <Sidebar />
@@ -72,13 +73,16 @@ export default function AlbumPage() {
           {images.length >= 1 ? (
             <div className="grid grid-cols-1 gap-8 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
               {images.map((image, index) => (
-                <div key={image.id} className="">
+                <div key={image.id} className="relative">
                   <img
                     onClick={() => openImageViewer(index)}
                     src={`${imgBaseURL}/${image.thumbnail}`}
                     alt={image.alt}
                     className="h-64 w-full cursor-pointer rounded-lg object-cover"
                   />
+                  <div className="absolute right-3 top-3">
+                    <PhotoContextMenu photoId={image.id} />
+                  </div>
                 </div>
               ))}
             </div>

@@ -84,9 +84,9 @@ export default function Sidebar() {
             /> */}
             <SidebarItem
               icon={<IoMdPhotos size={20} />}
-              text="Photos"
-              active={location.pathname === "/admin/dashboard/photos"}
-              onClick={() => navigate("/admin/dashboard/photos")}
+              text="Albums"
+              active={location.pathname === "/admin/dashboard/albums"}
+              onClick={() => navigate("/admin/dashboard/albums")}
             />
             {/* <SidebarItem
               icon={<LuLayoutDashboard size={20} />}
@@ -103,6 +103,7 @@ export default function Sidebar() {
             <SidebarItem
               icon={<SlSettings size={20} />}
               onClick={() => navigate("/admin/dashboard/setting")}
+              active={location.pathname === "/admin/dashboard/setting"}
               text="Settings"
             />
             <div className="p-4">
@@ -150,12 +151,8 @@ export function SidebarItem({ icon, text, active, onClick }) {
       className={`
         group relative my-1 flex cursor-pointer items-center
         rounded-md px-3 py-2
-        font-medium transition-colors
-        ${
-          active
-            ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-            : "text-gray-600 hover:bg-indigo-50"
-        }
+        font-medium transition-colors duration-0
+        ${active ? "bg-black text-white" : "text-gray-600 hover:bg-black/20 "}
     `}
     >
       {icon}
@@ -171,8 +168,8 @@ export function SidebarItem({ icon, text, active, onClick }) {
         <div
           className={`
           invisible absolute left-full z-50 ml-6 -translate-x-3
-          rounded-md bg-indigo-100 px-2
-          py-1 text-sm text-indigo-800 opacity-20
+          rounded-md bg-black px-2
+          py-1 text-sm text-white
           transition-all group-hover:visible group-hover:translate-x-0
           group-hover:opacity-100
       `}

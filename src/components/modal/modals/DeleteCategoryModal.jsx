@@ -34,23 +34,25 @@ export default function DeleteCategoryModal() {
   };
 
   useEffect(() => {
-    const modalFetchCategory = async () => {
-      setIsLoading(true);
-      try {
-        const response = await api.get(`/category/${categoryId}`);
-        if (response.status === 200) {
-          const category = response.data.category;
-          const fetchedName = category.name;
-          setName(fetchedName);
+    if (deleteCategoryModal.isOpen) {
+      const modalFetchCategory = async () => {
+        setIsLoading(true);
+        try {
+          const response = await api.get(`/category/${categoryId}`);
+          if (response.status === 200) {
+            const category = response.data.category;
+            const fetchedName = category.name;
+            setName(fetchedName);
+          }
+        } catch (error) {
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      };
 
-    modalFetchCategory();
-  }, [categoryId]);
+      modalFetchCategory();
+    }
+  }, [categoryId, deleteCategoryModal.isOpen]);
 
   const bodyContent = (
     <div className="flex flex-col justify-evenly gap-y-5">

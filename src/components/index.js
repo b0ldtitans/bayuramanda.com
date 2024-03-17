@@ -8,7 +8,10 @@ import RecoverCategories from "./RecoverCategories";
 import EditCategoryModal from "./modal/modals/EditCategoryModal";
 import DeleteCategoryModal from "./modal/modals/DeleteCategoryModal";
 import PhotoUploader from "./PhotoUploader";
+import ContextMenu from "./ContextMenu";
 import NewAlbumButton from "./NewAlbumButton";
+import PhotoContextMenu from "./PhotoContextMenu";
+import UploadProfilePicture from "./UploadProfilePicture";
 
 export {
   LoadingDots,
@@ -22,4 +25,7 @@ export {
   RecoverCategories,
   PhotoUploader,
   NewAlbumButton,
+  ContextMenu,
+  PhotoContextMenu,
+  UploadProfilePicture,
 };

@@ -28,11 +28,15 @@ export default function App() {
   const DeleteCategoryModal = lazy(
     () => import("./components/modal/modals/DeleteCategoryModal"),
   );
+  const EditPhotoModal = lazy(
+    () => import("./components/modal/modals/EditPhotoModal"),
+  );
   return (
     <Suspense fallback={<LoadingDots />}>
       <EditCategoryModal />
       <DeleteCategoryModal />
       <NewAlbumModal />
+      <EditPhotoModal />
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -44,9 +48,8 @@ export default function App() {
           path="/admin/dashboard/"
           element={<ProtectedRoute element={<AdminLayout />} />}
         >
-          {/* <Route index element={<PhotosDashboard />} /> */}
-          {/* <Route path="categories" index element={<CategoriesDashboard />} /> */}
-          <Route path="photos" index element={<PhotosDashboard />} />
+          <Route index element={<PhotosDashboard />} />
+          <Route path="albums" index element={<PhotosDashboard />} />
           <Route
             path="photos/album/:categoryId"
             index

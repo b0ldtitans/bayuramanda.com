@@ -45,4 +45,25 @@ const newAlbumModal = createSlice({
   },
 });
 
-export { editCategoryModal, deleteCategoryModal, newAlbumModal };
+const editPhotoModal = createSlice({
+  name: "editPhotoModal",
+  initialState: { isOpen: false },
+  reducers: {
+    openEditPhotoModal(state) {
+      state.isOpen = true;
+    },
+    closeEditPhotoModal(state) {
+      state.isOpen = false;
+    },
+    setPhotoId(state, action) {
+      state.photoId = action.payload;
+    },
+  },
+});
+
+export {
+  editCategoryModal,
+  deleteCategoryModal,
+  newAlbumModal,
+  editPhotoModal,
+};

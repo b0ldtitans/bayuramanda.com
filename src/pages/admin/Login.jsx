@@ -38,10 +38,9 @@ export default function Login() {
         if (response.status === 200) {
           const userData = response.data;
           const token = userData.token;
-          window.localStorage.setItem("token", token);
           Cookies.set("token", token);
           Cookies.set("isLoggedIn", "true");
-          navigate("/admin/dashboard/photos");
+          navigate("/admin/dashboard/albums");
           toast.success("Login success");
         }
       } catch (error) {

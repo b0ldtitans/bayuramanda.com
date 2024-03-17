@@ -50,7 +50,7 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
                 className="h-full w-full object-cover p-12"
               />
               <div className="absolute right-3 top-3">
-                <ContextMenu categoryId={categoryId} />
+                <ContextMenu categoryId={categoryId} albu={true} />
               </div>
             </div>
           ) : (

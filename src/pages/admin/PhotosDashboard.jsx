@@ -30,7 +30,7 @@ export function PhotosComponent() {
     return <LoadingDots />;
   }
 
-  document.title = "Photos";
+  document.title = "Albums";
 
   return (
     <div className="flex h-full w-full">
@@ -50,7 +50,7 @@ export function PhotosComponent() {
                 <AlbumCard
                   categoryId={category.id}
                   categoryName={category.name}
-                  imagesCount={category.imagesCount}
+                  imagesCount={category.imageCount}
                 />
               </div>
             ))}
