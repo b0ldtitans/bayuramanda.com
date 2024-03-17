@@ -16,7 +16,7 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
         setIsLoading(true);
         const response = await api.get(`/image/category/${categoryId}?limit=4`);
         if (response.status === 200) {
-          const data = response.data.category;
+          const data = response.data.data;
           setPhotos(data.Images);
         }
       } catch (error) {
@@ -72,7 +72,9 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
         <div>
           <div className="ml-2 mt-4 text-lg font-semibold">{categoryName}</div>
           <div className="ml-2 text-sm font-light">
-            {imagesCount === 0 ? "No Images" : `${imagesCount} Images`}
+            {imagesCount === 0 || undefined || null
+              ? "No Images"
+              : `${imagesCount} Images`}
           </div>
         </div>
       </div>

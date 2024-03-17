@@ -12,6 +12,7 @@ export default function RecoverCategories() {
     try {
       const response = await api.get("/category/deleted");
       if (response.status === 200) {
+        console.log(response);
         setCategories(response.data.categories);
         setIsLoading(false);
       }
@@ -48,28 +49,28 @@ export default function RecoverCategories() {
 
   document.title = "Categories";
   return (
-    <table className="w-full h-full">
+    <table className="h-full w-full">
       <thead className="border-b">
         <tr>
-          <th className="px-4 py-2 text-center border-gray-200">Categories</th>
-          <th className="px-4 py-2 text-center border-gray-200">Description</th>
-          <th className="px-4 py-2 text-center border-gray-200">Actions</th>
+          <th className="border-gray-200 px-4 py-2 text-center">Categories</th>
+          <th className="border-gray-200 px-4 py-2 text-center">Description</th>
+          <th className="border-gray-200 px-4 py-2 text-center">Actions</th>
         </tr>
       </thead>
       <tbody className={`${categories.length <= 20 ? "h-full" : "h-full"}`}>
         {categories.map((category) => {
           return (
             <tr key={category.id} className="my-2">
-              <td className="p-2 text-center border-gray-200">
+              <td className="border-gray-200 p-2 text-center">
                 {category.name}
               </td>
-              <td className="p-2 text-center border-gray-200">
+              <td className="border-gray-200 p-2 text-center">
                 {category.description}
               </td>
-              <td className="p-2 text-center border-gray-200 rounded-md">
+              <td className="rounded-md border-gray-200 p-2 text-center">
                 <button
                   onClick={() => recoverCategory(category.id)}
-                  className="p-2 px-4 text-white bg-black rounded-md hover:bg-black/80"
+                  className="rounded-md bg-black p-2 px-4 text-white hover:bg-black/80"
                 >
                   Recover
                 </button>

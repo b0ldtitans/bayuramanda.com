@@ -38,8 +38,9 @@ export default function Login() {
         if (response.status === 200) {
           const userData = response.data;
           const token = userData.token;
-          Cookies.set("isLoggedIn", "true", { expires: remember ? 7 : 1 });
-          Cookies.set("token", token, { expires: remember ? 7 : 1 });
+          window.localStorage.setItem("token", token);
+          Cookies.set("token", token);
+          Cookies.set("isLoggedIn", "true");
           navigate("/admin/dashboard/photos");
           toast.success("Login success");
         }
@@ -52,6 +53,7 @@ export default function Login() {
   });
 
   document.title = "Admin Login";
+
   return (
     <section className="bg-gray-50">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">

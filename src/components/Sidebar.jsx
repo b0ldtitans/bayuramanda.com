@@ -49,7 +49,7 @@ export default function Sidebar() {
     : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Missing_avatar.svg/1200px-Missing_avatar.svg.png";
 
   return (
-    <aside className={`h-screen`}>
+    <aside className={` h-screen`}>
       <nav className="flex h-full flex-col border-r bg-white shadow-sm">
         <div className={`flex items-center justify-between p-4 pb-2`}>
           <button

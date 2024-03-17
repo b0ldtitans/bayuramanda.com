@@ -49,20 +49,23 @@ export default function RecoverPhotos() {
 
   return (
     <div className="p-4">
+      {deletedPhotos.length === 0 && (
+        <div className="text-center">No deleted photos</div>
+      )}
       <div className="gallery">
         {deletedPhotos.map((photo, index) => (
           <div
             key={photo.id}
             onClick={() => openImageViewer(index)}
-            className="relative pics"
+            className="pics relative"
           >
             <img
               src={`${imgBaseURL}/${photo.thumbnail}`}
               alt={photo.alt}
               loading="lazy"
-              className="object-cover w-full h-full"
+              className="h-full w-full object-cover"
             />
-            <div className="absolute z-50 top-3 right-3">
+            <div className="absolute right-3 top-3 z-50">
               <RestoreButton
                 photoId={photo.id}
                 fetch={() => fetchDeletedPhotos}
@@ -115,9 +118,9 @@ export function RestoreButton({ photoId, fetch, setLoading }) {
   return (
     <div
       onClick={handleClick}
-      className="relative rounded-md cursor-pointer hover:opacity-80"
+      className="relative cursor-pointer rounded-md hover:opacity-80"
     >
-      <div className="bg-black text-white rounded-md px-2 absolute -top-[2px] -right-[2px]">
+      <div className="absolute -right-[2px] -top-[2px] rounded-md bg-black px-2 text-white">
         Restore
       </div>
     </div>

@@ -29,7 +29,7 @@ export function HomeComponent() {
       setIsLoading(true);
       try {
         const response = await api.get(
-          searchParams ? `/image?categoryName=${searchParams}` : "/image"
+          searchParams ? `/image?categoryName=${searchParams}` : "/image",
         );
 
         document.title = searchParams
