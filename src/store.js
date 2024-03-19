@@ -4,6 +4,7 @@ import {
   deleteCategoryModal,
   newAlbumModal,
   editPhotoModal,
+  uploadPhotoModal,
 } from "./components/modal/modalSlice";
 
 const rootReducer = {
@@ -11,6 +12,7 @@ const rootReducer = {
   deleteCategoryModal: deleteCategoryModal.reducer,
   newAlbumModal: newAlbumModal.reducer,
   editPhotoModal: editPhotoModal.reducer,
+  uploadPhotoModal: uploadPhotoModal.reducer,
 };
 
 const store = configureStore({

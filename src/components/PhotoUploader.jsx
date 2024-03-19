@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import UploadOptions from "./UploadOptions";
 import { api } from "../api";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
@@ -67,9 +66,9 @@ export default function PhotoUploader({ categoryId }) {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center pt-6">
+    <section className="flex flex-row pt-6">
       <div
-        className="relative w-[400px] cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6"
+        className="relative h-[100px] w-[100px] cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -106,19 +105,21 @@ export default function PhotoUploader({ categoryId }) {
           <p className="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
         </div>
       </div>
-      <div className="gallery mt-12">
-        {previewSrcs.map((src, index) => (
-          <UploadOptions
-            removeHandler={handleRemovePhoto}
-            index={index}
-            uploadHandler={uploadPhotos}
-          >
-            <div key={index} className="pics">
-              <img src={src} alt="preview" className="m-2 mx-auto max-h-64" />
-            </div>
-          </UploadOptions>
-        ))}
-      </div>
+      {previewSrcs.length >= 1 && (
+        <div className="max-w-[2520px] px-8">
+          <div className="grid grid-cols-1 gap-8 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            {previewSrcs.map((src, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={src}
+                  alt="preview"
+                  className=" w-[200px] max-w-[100px] cursor-pointer rounded-lg object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

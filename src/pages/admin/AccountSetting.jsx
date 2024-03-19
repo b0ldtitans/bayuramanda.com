@@ -11,28 +11,28 @@ import * as Yup from "yup";
 import { toast } from "sonner";
 
 export default function AccountSetting() {
+  document.title = "Account Setting";
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState({});
-  document.title = "Account Setting";
+
+  const fetchProfile = async () => {
+    setIsLoading(true);
+    try {
+      const response = await api.get("/auth", {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+      if (response.status === 200) {
+        setUser(response.data.user);
+      }
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      setIsLoading(true);
-      try {
-        const response = await api.get("/auth", {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        });
-        if (response.status === 200) {
-          setUser(response.data.user);
-        }
-      } catch (error) {
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchProfile();
   }, []);
 
@@ -63,7 +63,6 @@ export default function AccountSetting() {
     }),
     onSubmit: async (values) => {
       if (values.profilePicture === null && !formik.dirty.profilePicture) {
-        // If profilePicture hasn't changed and is not a new upload, don't submit it
         delete values.profilePicture;
       }
       setIsLoading(true);
@@ -82,6 +81,7 @@ export default function AccountSetting() {
           },
         });
         if (response.status === 200) {
+          fetchProfile();
           toast.success("Profile successfully updated");
         }
       } catch (error) {
@@ -96,7 +96,7 @@ export default function AccountSetting() {
     <div className="flex h-full w-full">
       <Sidebar />
       <div className="flex w-full flex-col p-4 pl-8">
-        <h1 className="py-4 text-2xl font-semibold">Account Setting</h1>
+        <h1 className="py-1 text-2xl font-semibold">Account Setting</h1>
         <div className="">
           <form className="gap-4">
             <div className="flex flex-col pt-4">
@@ -151,7 +151,7 @@ export default function AccountSetting() {
                 }`}
               />
             </div>
-            <div className="flex w-1/4 flex-col pt-4 ">
+            <div className="flex w-2/4 flex-col pt-4 ">
               <UploadProfilePicture
                 id="profilePicture"
                 name="profilePicture"

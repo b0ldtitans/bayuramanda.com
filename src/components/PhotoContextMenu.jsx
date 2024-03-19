@@ -15,8 +15,11 @@ export default function PhotoContextMenu({ photoId }) {
         }}
         className="relative cursor-pointer transition hover:opacity-80"
       >
-        <div className="flex items-center justify-center rounded-full bg-black/10 p-1">
-          <MdEdit size={20} className="text-white hover:text-black" />
+        <div className="flex items-center justify-center rounded-full bg-black/30 p-1 transition-colors hover:bg-black/20">
+          <MdEdit
+            size={20}
+            className="text-white transition-colors hover:text-black"
+          />
         </div>
       </div>
     </div>

@@ -61,9 +61,29 @@ const editPhotoModal = createSlice({
   },
 });
 
+const uploadPhotoModal = createSlice({
+  name: "uploadPhotoModal",
+  initialState: { isOpen: false },
+  reducers: {
+    openUploadPhotoModal(state) {
+      state.isOpen = true;
+    },
+    closeUploadPhotoModal(state) {
+      state.isOpen = false;
+    },
+    setCategoryId(state, action) {
+      state.categoryId = action.payload;
+    },
+    setCategoryName(state, action) {
+      state.categoryName = action.payload;
+    },
+  },
+});
+
 export {
   editCategoryModal,
   deleteCategoryModal,
   newAlbumModal,
   editPhotoModal,
+  uploadPhotoModal,
 };

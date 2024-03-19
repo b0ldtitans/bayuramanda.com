@@ -76,24 +76,15 @@ export default function Sidebar() {
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">
-            {/* <SidebarItem
-              icon={<TfiDashboard size={20} />}
-              text="Dashboard"
-              active={location.pathname === "/admin/dashboard"}
-              onClick={() => navigate("/admin/dashboard")}
-            /> */}
             <SidebarItem
               icon={<IoMdPhotos size={20} />}
               text="Albums"
-              active={location.pathname === "/admin/dashboard/albums"}
-              onClick={() => navigate("/admin/dashboard/albums")}
+              active={
+                location.pathname === "/admin/dashboard/" ||
+                location.pathname.includes("/admin/dashboard/albums/")
+              }
+              onClick={() => navigate("/admin/dashboard/albums/")}
             />
-            {/* <SidebarItem
-              icon={<LuLayoutDashboard size={20} />}
-              text="Categories"
-              active={location.pathname === "/admin/dashboard/categories"}
-              onClick={() => navigate("/admin/dashboard/categories")}
-            /> */}
             <SidebarItem
               icon={<FaTrashRestore size={20} />}
               text="Recover"

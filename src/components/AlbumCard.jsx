@@ -35,7 +35,7 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
 
   return (
     <div
-      onClick={() => navigate(`/admin/dashboard/photos/album/${categoryId}`)}
+      onClick={() => navigate(`/admin/dashboard/albums/${categoryId}`)}
       className="group col-span-1 cursor-pointer"
     >
       <div className="flex w-full flex-col gap-0 rounded-xl p-2 transition-all duration-200 hover:bg-black/5">
@@ -50,7 +50,7 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
                 className="h-full w-full object-cover p-12"
               />
               <div className="absolute right-3 top-3">
-                <ContextMenu categoryId={categoryId} albu={true} />
+                <ContextMenu categoryId={categoryId} />
               </div>
             </div>
           ) : (

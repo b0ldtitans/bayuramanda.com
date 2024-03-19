@@ -56,6 +56,7 @@ export function HomeComponent() {
   if (isLoading) {
     return <LoadingDots />;
   }
+
   if (images.length === 0) {
     return <EmptyState />;
   }
@@ -89,7 +90,9 @@ export function HomeComponent() {
             disableScroll={true}
             closeOnClickOutside={true}
             onClose={closeImageViewer}
-            backgroundStyle={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
+            backgroundStyle={{
+              backgroundColor: "rgba(0, 0, 0, 0.9)",
+            }}
           />
         )}
       </div>

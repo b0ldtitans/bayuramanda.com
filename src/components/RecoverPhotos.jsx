@@ -50,7 +50,9 @@ export default function RecoverPhotos() {
   return (
     <div className="p-4">
       {deletedPhotos.length === 0 && (
-        <div className="text-center">No deleted photos</div>
+        <div className="text-center text-xl font-semibold">
+          No photos to recover
+        </div>
       )}
       <div className="gallery">
         {deletedPhotos.map((photo, index) => (
@@ -100,7 +102,6 @@ export function RestoreButton({ photoId, fetch, setLoading }) {
       });
       if (response.status === 200) {
         toast.success("Photo successfully restored");
-        window.location.reload();
       }
     } catch (error) {
       toast.error("Failed to restore photo");

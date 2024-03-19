@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
-import Heading from "../Heading";
 import { api } from "../../../api";
 import { toast } from "sonner";
 import useNewAlbumModal from "../../../hooks/useNewAlbumModal";
@@ -8,7 +7,7 @@ import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const EditCategoryModal = () => {
+const NewAlbumModal = () => {
   const newAlbumModal = useNewAlbumModal();
   const [isLoading, setIsLoading] = useState(false);
   const token = Cookies.get("token");
@@ -19,7 +18,7 @@ const EditCategoryModal = () => {
       description: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("Category Name is Required"),
+      name: Yup.string().required("Album Name is Required"),
       description: Yup.string().optional("Required"),
     }),
     onSubmit: async (values) => {
@@ -42,7 +41,7 @@ const EditCategoryModal = () => {
           window.location.reload();
         }
       } catch (error) {
-        toast.error("Failed creating new category");
+        toast.error(error.response.data.message);
       } finally {
         setIsLoading(false);
       }
@@ -53,7 +52,7 @@ const EditCategoryModal = () => {
     <div className="flex flex-col justify-evenly gap-y-5">
       <form>
         <label className="" htmlFor="name">
-          Category Name <sup className="text-red-500">*</sup>
+          Album Name <sup className="text-red-500">*</sup>
         </label>
         <input
           className="w-full rounded-md border-2 border-gray-300 p-2"
@@ -95,4 +94,4 @@ const EditCategoryModal = () => {
   );
 };
 
-export default EditCategoryModal;
+export default NewAlbumModal;

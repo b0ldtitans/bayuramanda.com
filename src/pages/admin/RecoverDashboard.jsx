@@ -16,7 +16,7 @@ export function RecoverComponent() {
         <Tabs defaultValue="photos">
           <Tabs.List>
             <Tabs.Tab value="photos">Photos</Tabs.Tab>
-            <Tabs.Tab value="categories">Categories</Tabs.Tab>
+            <Tabs.Tab value="categories">Albums</Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value="photos">

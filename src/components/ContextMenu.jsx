@@ -18,16 +18,10 @@ export default function ContextMenu({ categoryId }) {
         onClick={handleClick}
         className="relative z-50 cursor-pointer transition hover:opacity-80"
       >
-        <div className="flex items-center justify-center rounded-full bg-black/10 p-3">
+        <div className="flex items-center justify-center rounded-full bg-black/20 p-1 transition-all hover:bg-black/10">
           <HiOutlineDotsHorizontal
-            size={28}
-            className="
-            absolute
-            -right-[2px]
-            -top-[2px]
-            text-white
-            hover:text-black
-          "
+            size={18}
+            className="text-white transition-colors hover:text-black"
           />
         </div>
       </div>

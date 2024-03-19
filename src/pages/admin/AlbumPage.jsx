@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 import { Sidebar, LoadingDots, PhotoContextMenu } from "../../components";
 import { api, imgBaseURL } from "../../api";
 import { Pagination } from "@mantine/core";
+import useUploadPhotoModal from "../../hooks/useUploadPhotoModal";
 const ImageViewer = lazy(() => import("react-simple-image-viewer"));
 
 export default function AlbumPage() {
+  const uploadPhotoModal = useUploadPhotoModal();
   const [isLoading, setIsLoading] = useState(true);
   const [images, setImages] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -15,8 +17,8 @@ export default function AlbumPage() {
   const { categoryId } = useParams();
 
   // pagination
-  const itemsPerPage = 18;
   const [pageNumber, setPageNumber] = useState(1);
+  const itemsPerPage = pageNumber !== 1 ? 18 : 17;
 
   // client side code
   useEffect(() => {
@@ -62,16 +64,31 @@ export default function AlbumPage() {
   }
 
   document.title = `${categoryData.name} - Album`;
+
   return (
     <div className="flex h-full w-full">
       <Sidebar />
-      <div className="flex flex-col">
+      <div className="flex w-full flex-col">
         <h1 className="w-full px-8 pb-0 pt-8 text-2xl font-semibold">
           {categoryData.name}
         </h1>
         <div className="max-w-[2520px] px-8">
           {images.length >= 1 ? (
-            <div className="grid grid-cols-1 gap-8 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+            <div
+              className={`grid grid-cols-1 gap-8 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6`}
+            >
+              <div className={`${pageNumber !== 1 ? "hidden" : ""}`}>
+                <div
+                  onClick={() => {
+                    uploadPhotoModal.setCategoryName(categoryData.name);
+                    uploadPhotoModal.setCategoryId(categoryId);
+                    uploadPhotoModal.onOpen();
+                  }}
+                  className="flex h-64 w-full cursor-pointer items-center justify-center rounded-lg bg-[#3D4042] object-cover text-center text-xl text-[#fff] transition-colors hover:bg-opacity-90"
+                >
+                  + Add to album
+                </div>
+              </div>
               {images.map((image, index) => (
                 <div key={image.id} className="relative">
                   <img
@@ -87,14 +104,15 @@ export default function AlbumPage() {
               ))}
             </div>
           ) : (
-            <div className="flex h-96 w-full items-center justify-center text-center">
-              <h1 className="flex items-center justify-center text-center text-2xl font-semibold">
-                No Images Found
-              </h1>
+            <div className="flex h-[80vh] flex-col items-center justify-center gap-y-4">
+              <h1 className="text-3xl font-bold">No images found</h1>
+              <button className="my-2 rounded-md bg-black p-2 px-4 text-xl font-bold text-white">
+                Add Images
+              </button>
             </div>
           )}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center pt-4">
+            <div className="flex items-center justify-center pt-4 ">
               <Pagination
                 total={totalPages}
                 page={pageNumber}
