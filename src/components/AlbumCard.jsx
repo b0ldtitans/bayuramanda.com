@@ -20,7 +20,6 @@ export default function AlbumCard({ categoryName, imagesCount, categoryId }) {
           setPhotos(data.Images);
         }
       } catch (error) {
-        console.log(error);
       } finally {
         setIsLoading(false);
       }

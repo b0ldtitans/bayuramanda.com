@@ -37,7 +37,6 @@ export default function AlbumPage() {
           setTotalPages(totalPages); // Set totalPages
         }
       } catch (error) {
-        console.error(error);
       } finally {
         setIsLoading(false);
       }
@@ -106,7 +105,14 @@ export default function AlbumPage() {
           ) : (
             <div className="flex h-[80vh] flex-col items-center justify-center gap-y-4">
               <h1 className="text-3xl font-bold">No images found</h1>
-              <button className="my-2 rounded-md bg-black p-2 px-4 text-xl font-bold text-white">
+              <button
+                className="my-2 rounded-md bg-black p-2 px-4 text-xl font-bold text-white"
+                onClick={() => {
+                  uploadPhotoModal.setCategoryName(categoryData.name);
+                  uploadPhotoModal.setCategoryId(categoryId);
+                  uploadPhotoModal.onOpen();
+                }}
+              >
                 Add Images
               </button>
             </div>

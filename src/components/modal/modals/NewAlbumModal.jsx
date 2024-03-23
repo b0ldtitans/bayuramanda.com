@@ -6,6 +6,7 @@ import useNewAlbumModal from "../../../hooks/useNewAlbumModal";
 import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Loader } from "@mantine/core";
 
 const NewAlbumModal = () => {
   const newAlbumModal = useNewAlbumModal();
@@ -86,7 +87,7 @@ const NewAlbumModal = () => {
       disabled={isLoading}
       isOpen={newAlbumModal.isOpen}
       onClose={newAlbumModal.onClose}
-      actionLabel={"Create New Album"}
+      actionLabel={isLoading ? <Loader color="white" /> : "Create New Album"}
       onSubmit={formik.handleSubmit}
       title={"Create New Album"}
       body={modalContent}

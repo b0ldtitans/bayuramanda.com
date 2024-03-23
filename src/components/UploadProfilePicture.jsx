@@ -16,9 +16,7 @@ export default function UploadProfilePicture({ label, formik, field, id }) {
 
         const preview = URL.createObjectURL(file);
         setPreview(preview);
-      } catch (error) {
-        console.error("Error handling dropped file:", error);
-      }
+      } catch (error) {}
     },
   });
 

@@ -13,7 +13,6 @@ export default function RecoverCategories() {
     try {
       const response = await api.get("/category/deleted");
       if (response.status === 200) {
-        console.log(response);
         setCategories(response.data.categories);
         setIsLoading(false);
       }
@@ -39,7 +38,6 @@ export default function RecoverCategories() {
         fetchCategories();
       }
     } catch (error) {
-      console.error(error);
       toast.error(error.response.data.message);
     }
   };

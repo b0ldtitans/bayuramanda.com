@@ -5,6 +5,7 @@ import { api, imgBaseURL } from "../../../api";
 import { toast } from "sonner";
 import useEditPhotoModal from "../../../hooks/useEditPhotoModal";
 import Cookies from "js-cookie";
+import { Loader } from "@mantine/core";
 
 const EditCategoryModal = () => {
   const editPhotoModal = useEditPhotoModal();
@@ -116,7 +117,7 @@ const EditCategoryModal = () => {
       disabled={isLoading}
       isOpen={editPhotoModal.isOpen}
       onClose={editPhotoModal.onClose}
-      actionLabel={"Save"}
+      actionLabel={isLoading ? <Loader color="white" /> : "Save"}
       onSubmit={submitEdit}
       secondaryActionLabel={"Delete"}
       secondaryAction={submitDelete}

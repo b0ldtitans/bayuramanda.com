@@ -5,6 +5,7 @@ import { api } from "../../../api";
 import { toast } from "sonner";
 import useEditCategoryModal from "../../../hooks/useEditCategoryModal";
 import Cookies from "js-cookie";
+import { Loader } from "@mantine/core";
 
 const EditCategoryModal = () => {
   const editCategoryModal = useEditCategoryModal();
@@ -101,7 +102,7 @@ const EditCategoryModal = () => {
       disabled={isLoading}
       isOpen={editCategoryModal.isOpen}
       onClose={editCategoryModal.onClose}
-      actionLabel={"Save"}
+      actionLabel={isLoading ? <Loader color="white" /> : "Save"}
       onSubmit={submitEdit}
       title={`Edit Album: ${name}`}
       body={modalContent}

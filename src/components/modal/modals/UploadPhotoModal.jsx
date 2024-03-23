@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Cookies from "js-cookie";
 import { useDropzone } from "react-dropzone";
+import { Loader } from "@mantine/core";
 
 const UploadPhotoModal = () => {
   const uploadPhotoModal = useUploadPhotoModal();
@@ -73,10 +74,10 @@ const UploadPhotoModal = () => {
 
         if (response.status === 200) {
           toast.success("Photo uploaded successfully");
+          setPreviewSrcs([]);
           uploadPhotoModal.onClose();
         }
       } catch (error) {
-        console.log(error);
         toast.error(error.response.data.message);
       } finally {
         setIsLoading(false);
@@ -84,11 +85,12 @@ const UploadPhotoModal = () => {
     },
   });
 
-  console.log(formik.values.images);
   const modalContent = (
     <section className="flex h-full w-full">
       <div className="max-w-[2520px] px-8">
-        <div className="grid grid-cols-4 gap-8 pt-2">
+        <div
+          className={`${previewSrcs.length === 0 ? "flex items-center justify-center" : "grid grid-cols-4 gap-8 pt-2 "}`}
+        >
           {previewSrcs.map((src, index) => (
             <div key={index} className="relative">
               <img
@@ -97,6 +99,7 @@ const UploadPhotoModal = () => {
                 className="h-[172px] w-[172px] cursor-pointer rounded-lg object-cover"
               />
               <button
+                disabled={isLoading}
                 className="absolute right-2 top-2 rounded-full bg-red-500 p-2 text-white"
                 onClick={() => handleDelete(index)}
               >
@@ -106,9 +109,8 @@ const UploadPhotoModal = () => {
           ))}
           <div
             {...getRootProps()}
-            className={`relative cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6 ${
-              isDragActive ? "border-indigo-600" : ""
-            }`}
+            className={`relative cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-6 
+            ${isDragActive ? "border-indigo-600" : ""} `}
           >
             <input {...getInputProps()} />
             {isDragActive ? (
@@ -133,7 +135,7 @@ const UploadPhotoModal = () => {
       disabled={isLoading}
       isOpen={uploadPhotoModal.isOpen}
       onClose={uploadPhotoModal.onClose}
-      actionLabel="Upload"
+      actionLabel={isLoading ? <Loader color="white" /> : "Upload"}
       onSubmit={formik.handleSubmit}
       title={`Upload to Album: ${categoryName}`}
       body={modalContent}

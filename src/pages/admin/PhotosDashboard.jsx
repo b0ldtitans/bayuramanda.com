@@ -39,7 +39,7 @@ export function PhotosComponent() {
       <Sidebar />
       <div className="flex w-full flex-col p-4 pl-8">
         <div className="flex justify-between ">
-          <h1 className="text-2xl font-semibold ">Photos</h1>
+          <h1 className="text-2xl font-semibold ">Albums</h1>
         </div>
         <div className="max-w-[2520px]">
           <div className="mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">

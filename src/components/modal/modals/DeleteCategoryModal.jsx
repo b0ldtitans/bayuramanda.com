@@ -6,6 +6,7 @@ import { api } from "../../../api";
 import { toast } from "sonner";
 import useDeleteCategoryModal from "../../../hooks/useDeleteCategoryModal";
 import Cookies from "js-cookie";
+import { Loader } from "@mantine/core";
 
 export default function DeleteCategoryModal() {
   const deleteCategoryModal = useDeleteCategoryModal();
@@ -72,7 +73,7 @@ export default function DeleteCategoryModal() {
       disabled={isLoading}
       isOpen={deleteCategoryModal.isOpen}
       onClose={deleteCategoryModal.onClose}
-      actionLabel={"Delete"}
+      actionLabel={isLoading ? <Loader color="white" /> : "Delete"}
       onSubmit={deleteCategory}
       title={"Confirm Delete"}
       body={bodyContent}

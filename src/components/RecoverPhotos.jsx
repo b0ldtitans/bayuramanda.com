@@ -33,7 +33,6 @@ export default function RecoverPhotos() {
         setDeletedPhotos(response.data.images);
       }
     } catch (error) {
-      console.error(error);
     } finally {
       setLoading(false);
     }
